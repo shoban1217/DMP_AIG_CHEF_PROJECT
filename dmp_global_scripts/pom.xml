@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+  <!-- ====================================================================== -->
+    <!-- P A R E N T P R O J E C T D E S C R I P T I O N -->
+    <!-- ====================================================================== -->
+    <parent>
+        <groupId>com.aig</groupId>
+        <artifactId>global</artifactId>
+		<version>${dmp-build-version}</version>
+    </parent>  
+    
+
+    <!-- ====================================================================== -->
+    <!-- P R O J E C T D E S C R I P T I O N -->
+    <!-- ====================================================================== -->
+
+    <artifactId>QCscripts</artifactId>
+    <packaging>pom</packaging>
+    <name>AIG Global java</name>
+    <description>
+        Complete business logic for AIG DMP Framework
+    </description>
+    <prerequisites>
+        <maven>3.0.4</maven>
+    </prerequisites>
+
+    <!--
+        Inclusion of repositories in POMs is controversial, to say the least.
+        It would be best if you proxied the Adobe repository using a Maven
+        Repository Manager. Once you do that, remove these sections.
+     -->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <url>http://repo1.maven.org/maven2</url>
+            <layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <url>http://repo1.maven.org/maven2</url>
+            <layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+        </pluginRepository>
+    </pluginRepositories>	
+	<distributionManagement>
+		<repository>
+			<id>archiva.internal</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>http://dmfctools.aig.net:5433/archiva/repository/internal</url>
+	    </repository>
+	    <snapshotRepository>
+			<id>archiva.snapshots</id>
+			<name>Archiva Managed Snapshot Repository</name>
+			<url>http://dmfctools.aig.net:5433/archiva/repository/snapshots</url>
+	    </snapshotRepository>
+	</distributionManagement>
+ 
+    <!-- ====================================================================== -->
+    <!-- P R O P E R T I E S -->
+    <!-- ====================================================================== -->
+    <properties>
+        <crx.host>localhost</crx.host>
+        <crx.port>4504</crx.port>
+        <crx.username>admin</crx.username>
+        <crx.password>admin</crx.password>
+        <publish.crx.host>localhost</publish.crx.host>
+        <publish.crx.port>4505</publish.crx.port>
+        <publish.crx.username>admin</publish.crx.username>
+        <publish.crx.password>admin</publish.crx.password>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<repo.host>206.80.55.66:8888</repo.host>
+    </properties>
+ 
+    <dependencyManagement>
+        <dependencies>
+			<dependency>				
+				<groupId>com.adobe.aem</groupId>
+				<artifactId>aem-api</artifactId>
+				<version>6.0.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>4.2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.compendium</artifactId>
+                <version>4.2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.scr.annotations</artifactId>
+                <version>1.6.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>biz.aQute</groupId>
+                <artifactId>bndlib</artifactId>
+                <version>1.43.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.6.1</version>
+                <scope>provided</scope>
+            </dependency>
+			<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.1</version>
+            <scope>provided</scope>
+	    </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+			
+            <dependency>
+                <groupId>javax.jcr</groupId>
+                <artifactId>jcr</artifactId>
+                <version>2.0</version>
+                <scope>provided</scope>
+            </dependency>
+			<dependency>
+             <groupId>javax.servlet</groupId>
+             <artifactId>jsp-api</artifactId>
+             <version>2.0</version>
+             <scope>provided</scope>
+			</dependency>
+            <dependency>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>org.apache.sling.api</artifactId>
+                <version>2.2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>org.apache.sling.jcr.api</artifactId>
+                <version>2.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8.1</version>
+                <scope>test</scope>
+            </dependency>
+        <dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.1</version>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpcore</artifactId>
+		<version>4.1</version>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>com.aig</groupId>
+		<artifactId>global-apps</artifactId>
+		<version>P6.GLB.REL11.19</version>
+	</dependency>
+	<dependency>
+		<groupId>com.aig</groupId>
+		<artifactId>apps_system</artifactId>
+		<version>P6.GLB.REL11.19</version>
+	</dependency>
+	<dependency>
+		<groupId>com.aig</groupId>
+		<artifactId>infra-apps</artifactId>
+		<version>P6.GLB.REL11.19</version>
+	</dependency>
+	<dependency>
+		<groupId>com.aig</groupId>
+		<artifactId>misc_config</artifactId>
+		<version>P6.GLB.REL11.19</version>
+	</dependency>
+        </dependencies>
+    </dependencyManagement>
+ 
+   <build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>create-zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>zip.xml</descriptor>
+                            </descriptors>
+                            <finalName>QCscripts</finalName> <!-- Name of zip file -->
+                            <appendAssemblyId>false</appendAssemblyId> <!-- Do not concatenate "zip-id" to the finalName" -->
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-tar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                        <descriptors>
+                            <descriptor>tar.xml</descriptor>
+                        </descriptors>
+                </configuration>
+                </execution>
+            </executions> 
+        </plugin>
+    </plugins>
+</build>
+</project>

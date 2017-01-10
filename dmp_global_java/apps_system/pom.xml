@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- ====================================================================== -->
+	<!-- P A R E N T P R O J E C T D E S C R I P T I O N -->
+	<!-- ====================================================================== -->
+	<parent>
+		<groupId>com.aig.dmp</groupId>
+		<artifactId>global-parent-java</artifactId>
+		<version>12.0.25-SNAPSHOT</version>
+		<relativePath>../global_parent/pom.xml</relativePath>
+	</parent>  
+
+
+	<!-- ====================================================================== -->
+	<!-- P R O J E C T D E S C R I P T I O N -->
+	<!-- ====================================================================== -->
+
+	<artifactId>apps_system</artifactId>
+	<packaging>content-package</packaging>
+	<name>Apps System Package</name>
+	<description>Apps System Package for Global Code base containing functionalities that customize AEM functionalities</description>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/content/jcr_root</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.vlt</exclude>
+					<exclude>**/*.vltignore</exclude>
+					<exclude>**/*.dmdb</exclude>
+					<exclude>**/*.dm</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<plugin>
+			<groupId>com.day.jcr.vault</groupId>
+			<artifactId>content-package-maven-plugin</artifactId>
+				<configuration>
+					<group>aig-global</group>
+					<filterSource>src/main/content/META-INF/vault/filter.xml</filterSource>
+					<failOnMissingEmbed>true</failOnMissingEmbed>
+					<targetURL>http://${crx.host}:${crx.port}/crx/packmgr/service.jsp</targetURL>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>autoInstallPackageAuthor</id>
+			<build>
+			<plugins>
+				<plugin>
+					<groupId>com.day.jcr.vault</groupId>
+					<artifactId>content-package-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>install-package-author</id>
+							<phase>install</phase>
+							<goals>
+								<goal>install</goal>
+							</goals>
+							<configuration>
+								<targetURL>http://${author1.host}:${author1.port}/crx/packmgr/service.jsp</targetURL>
+								<userId>${author1.username}</userId>
+								<password>${author1.password}</password>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>autoInstallPackagePublish</id>
+			<build>
+			<plugins>
+				<plugin>
+					<groupId>com.day.jcr.vault</groupId>
+					<artifactId>content-package-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>install-package-publish</id>
+							<phase>install</phase>
+							<goals>
+								<goal>install</goal>
+							</goals>
+							<configuration>
+								<targetURL>http://${publish1.host}:${publish1.port}/crx/packmgr/service.jsp</targetURL>
+								<userId>${publish1.username}</userId>
+								<password>${publish1.password}</password>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

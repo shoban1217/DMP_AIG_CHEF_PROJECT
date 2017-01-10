@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- ====================================================================== -->
+	<!-- A G G R E G A T O R P R O J E C T D E S C R I P T I O N -->
+	<!-- ====================================================================== -->
+ 
+	<groupId>com.aig.dmp</groupId>
+	<artifactId>global-aggregator-ui</artifactId>
+	<version>12.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Global Aggregator Project for UI</name>
+	<description>Maven Aggregator project for global UI code base</description>
+
+        <build>
+                <pluginManagement>
+                	<plugins>
+                        	<plugin>
+                                	<groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-deploy-plugin</artifactId>
+                                        <version>2.7</version>
+                                        <configuration>
+                                        	<skip>true</skip>
+                                        </configuration>
+                                </plugin>
+ 			</plugins>
+                </pluginManagement>
+        </build>
+        
+	<!-- This entry is no longer needed as a seperate profile is defined below for 
+	all and each module to allow deployment of individual or bunch of modules -->
+	<!--modules>
+		<module>css</module>
+		<module>js</module>
+	</modules-->
+	
+	<profiles>
+	    <profile>
+	      <id>css</id>
+	      <modules>
+			<module>global_css</module>
+	      </modules>
+	    </profile>
+	    <profile>
+	      <id>js</id>
+	      <modules>
+	      		<module>global_js</module>
+	      </modules>
+	    </profile>
+	    <profile>
+	      <id>all</id>
+	       <activation>
+		 <activeByDefault>true</activeByDefault>
+	       </activation>
+	      <modules>
+			<module>global_css</module>
+			<module>global_js</module>			
+	      </modules>
+	    </profile>
+	</profiles>
+	
+</project>

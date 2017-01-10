@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="GTAF_PreBuild" default="all" basedir=".">  
+
+<!-- ========== Initialize Properties =================================== -->
+	<property environment="env"/>
+	<property file="prebuild.properties" />
+	<property name="testdata_src" value="dmp_global_scripts/functional_testing"/>
+	<property name="testdata_trg" value="GTAF/src/TestData"/>
+	<property name="resource_src" value="dmp_global_scripts/functional_testing"/>
+	<property name="resource_trg" value="GTAF/src/TestScripts"/>
+	<property name="scripts_src" value="dmp_global_scripts/functional_testing/scripts"/>
+	<property name="scripts_trg" value="GTAF/src/TestScripts"/>
+
+	<target name="copy_scripts">
+		<copy todir="${dmp_scripts_trg_root}/${scripts_trg}">
+		    <fileset dir="${dmp_scripts_src_root}/${scripts_src}"/>
+		</copy>
+	</target>
+
+	<target name="copy_testdata" depends="copy_scripts">
+		<copy file="${dmp_scripts_src_root}/${testdata_src}/${environment}/TestData.xlsm" todir="${dmp_scripts_trg_root}/${testdata_trg}"/>
+	</target>
+
+	<target name="resource_scripts" depends="copy_testdata">
+		<copy file="${dmp_scripts_src_root}/${resource_src}/${environment}/Resource.xlsm" todir="${dmp_scripts_trg_root}/${resource_trg}"/>
+	</target>
+
+	<target name="all" depends="copy_scripts,copy_testdata,resource_scripts">
+		<echo message="Copied Test Scripts and Test Data from GitHub to GTAF Server."/>       
+	</target>
+ 	
+</project>
